@@ -1,4 +1,5 @@
 import 'package:crud_firebase_flutter/pages/home_page.dart';
+import 'package:crud_firebase_flutter/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,11 @@ class AppNormal extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.greenAccent,
       ),
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/cadastrar': (context) =>RegisterPage()
+      },
     );
   }
 }

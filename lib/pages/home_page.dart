@@ -1,3 +1,4 @@
+import 'package:crud_firebase_flutter/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,6 +30,25 @@ class _HomePageState extends State<HomePage> {
                  fontSize: 26.0
                ),
              ),
+           ),
+           ListTile(
+             leading: Icon(Icons.exit_to_app),
+             title: Text('Entrar'),
+             onTap: (){
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()) 
+              );
+             }
+           ),
+           ListTile(
+             leading: Icon(Icons.account_box),
+             title: Text('Cadastrar'),
+             onTap: () {
+               Navigator.pop(context);
+               Navigator.pushNamed(context, '/cadastrar');
+             },
            )
           ],
         ),
