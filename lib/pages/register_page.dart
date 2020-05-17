@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _emailController.dispose();
     _senhaController.dispose();
     _confirmaSenhaController.dispose();
+    super.dispose();
   }
 
  
