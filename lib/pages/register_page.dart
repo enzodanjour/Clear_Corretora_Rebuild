@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -115,13 +116,19 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Text('Enviar'),
                     color: Theme.of(context).primaryColor,
                     textColor: Colors.black,
-                    onPressed: (){
+                    onPressed: () async{
                       if(_registerFormKey.currentState.validate()){
-                        print('Deu bom');
-                        print('nome: ${_nameController.text}');
-                        print('email: ${_emailController.text}');
-                        print('Senha: ${_senhaController.text}');
-                        print('confirmaSenha ${_confirmaSenhaController.text}');
+                        try{
+                          final FirebaseUser user = (await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                            email: _emailController.text, 
+                            password: _senhaController.text
+                          )).user;  
+
+                          Navigator.pushNamed(context, '/');                      
+                        } catch(e){
+                            print('Error Happened: $e');
+                        }
                       }
                     }
                   ),
