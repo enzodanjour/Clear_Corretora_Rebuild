@@ -1,4 +1,5 @@
 import 'package:crud_firebase_flutter/pages/home_page.dart';
+import 'package:crud_firebase_flutter/pages/login_page.dart';
 import 'package:crud_firebase_flutter/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class AppNormal extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
+        '/entrar': (context) => LoginPage(),
         '/cadastrar': (context) =>RegisterPage()
       },
     );

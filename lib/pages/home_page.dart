@@ -36,10 +36,7 @@ class _HomePageState extends State<HomePage> {
              title: Text('Entrar'),
              onTap: (){
               Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()) 
-              );
+              Navigator.pushNamed(context, '/entrar');
              }
            ),
            ListTile(
