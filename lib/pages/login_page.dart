@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   ),
                 ),
-                Text('não tem uma conta? entre aqui'),
+                Text('Não tem uma conta? '),
                 FlatButton(
                   onPressed: (){
                     Navigator.pushNamed(context, '/cadastrar');
