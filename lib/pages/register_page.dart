@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegisterPage extends StatefulWidget {
 
@@ -7,7 +8,22 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-final _registerFormKey = GlobalKey<FormState>();
+  final _registerFormKey = GlobalKey<FormState>();
+
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _senhaController = TextEditingController();
+  final _confirmaSenhaController = TextEditingController();
+
+  //The purpose of calling dispose => Prevent memory leaks
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
+    _confirmaSenhaController.dispose();
+  }
+
  
   @override
   Widget build(BuildContext context) {
@@ -30,6 +46,7 @@ final _registerFormKey = GlobalKey<FormState>();
                    hintText: 'Nome completo',
                    labelText: 'Nome'
                  ),
+                 controller: _nameController,
                  validator: (value){
                    if(value.isEmpty){
                      return 'Preencha o nome';
@@ -44,9 +61,13 @@ final _registerFormKey = GlobalKey<FormState>();
                    labelText: 'Email'
                  ),
                  keyboardType: TextInputType.emailAddress,
+                 controller: _emailController,
                  validator: (value){
                    if(value.isEmpty){
                      return 'Preencha o email';
+                   }
+                   else if(!EmailValidator.validate(value)){
+                     return 'Informe um email válido';
                    }
                    return null;
                  }
@@ -58,9 +79,13 @@ final _registerFormKey = GlobalKey<FormState>();
                    labelText: 'Senha'
                  ),
                  obscureText: true,
+                 controller: _senhaController,
                  validator: (value){
                    if(value.isEmpty){
                      return 'Preencha a senha';
+                   }
+                   else if(value != _confirmaSenhaController.text){
+                     return 'Senhas diferentes';
                    }
                    return null;
                  },
@@ -72,10 +97,13 @@ final _registerFormKey = GlobalKey<FormState>();
                    labelText: 'Repita a senha'
                  ),
                  obscureText: true,
+                 controller: _confirmaSenhaController,
                  validator: (value){
-                   //TODO: corrigir em breve, validação falsa.
                    if(value.isEmpty){
                      return'Preencha uma senha';
+                   }
+                   else if(value != _senhaController.text){
+                     return 'Senhas diferentes';
                    }
                    return null;
                  },
@@ -89,6 +117,10 @@ final _registerFormKey = GlobalKey<FormState>();
                     onPressed: (){
                       if(_registerFormKey.currentState.validate()){
                         print('Deu bom');
+                        print('nome: ${_nameController.text}');
+                        print('email: ${_emailController.text}');
+                        print('Senha: ${_senhaController.text}');
+                        print('confirmaSenha ${_confirmaSenhaController.text}');
                       }
                     }
                   ),
